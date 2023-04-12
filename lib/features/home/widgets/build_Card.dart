@@ -27,7 +27,7 @@ class buildCard extends StatelessWidget {
                   'assets/images/malai_chaap.jpeg',
                   fit: BoxFit.cover,
                 ),
-                Padding(
+                const Padding(
                   padding: EdgeInsets.all(6.0),
                   child: Text(
                     'Malai Chaap',
@@ -37,7 +37,7 @@ class buildCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                Text(
+                const Text(
                   '120 ₹',
                   style: TextStyle(
                     fontSize: 18,

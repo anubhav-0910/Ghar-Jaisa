@@ -15,7 +15,7 @@ void main() {
     ChangeNotifierProvider(
       create: (context) => UserProvider(),
     ),
-  ], child: MyApp()));
+  ], child: const MyApp()));
 }
 
 class MyApp extends StatefulWidget {
@@ -41,13 +41,13 @@ class _MyAppState extends State<MyApp> {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSwatch().copyWith(
           primary: const Color(0xFFfd841f),
-          secondary: Color.fromARGB(255, 253, 242, 234),
+          secondary: const Color.fromARGB(255, 253, 242, 234),
         ),
       ),
       onGenerateRoute: (settings) => generateRoute(settings),
       home: Provider.of<UserProvider>(context).user.token.isNotEmpty
-          ? AppDrawer(HomeScreen())
-          : LoginScreen(),
+          ? AppDrawer(const HomeScreen())
+          : const LoginScreen(),
     );
   }
 }

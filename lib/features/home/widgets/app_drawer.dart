@@ -25,32 +25,6 @@ class _AppDrawerState extends State<AppDrawer> {
       childDecoration: const BoxDecoration(
         borderRadius: const BorderRadius.all(Radius.circular(16)),
       ),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          elevation: 0,
-          // title: const Text('Advanced Drawer Example'),
-          leading: IconButton(
-            onPressed: _handleMenuButtonPressed,
-            icon: ValueListenableBuilder<AdvancedDrawerValue>(
-              valueListenable: _advancedDrawerController,
-              builder: (_, value, __) {
-                return AnimatedSwitcher(
-                  duration: Duration(milliseconds: 250),
-                  child: Icon(
-                    value.visible
-                        ? Icons.clear
-                        : Icons.format_list_bulleted_sharp,
-                    key: ValueKey<bool>(value.visible),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-        body: widget.childWidget,
-      ),
       drawer: SafeArea(
         child: Container(
           child: ListTileTheme(
@@ -59,8 +33,10 @@ class _AppDrawerState extends State<AppDrawer> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                SizedBox(height: 80),
-                DrawerList(Icons.account_circle_rounded, 'Profile', () {}),
+                const SizedBox(height: 80),
+                DrawerList(Icons.account_circle_rounded, 'Profile', () {
+                  print('object');
+                }),
                 const Divider(
                   color: Colors.white,
                   indent: 75,
@@ -86,13 +62,13 @@ class _AppDrawerState extends State<AppDrawer> {
                   endIndent: 30,
                 ),
                 DrawerList(Icons.security_sharp, 'Security', () {}),
-                Spacer(),
+                const Spacer(),
                 TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(foregroundColor: Colors.white),
                   child: Row(
-                    children: [
-                      const SizedBox(
+                    children: const [
+                      SizedBox(
                         width: 30,
                       ),
                       Text(
@@ -104,7 +80,7 @@ class _AppDrawerState extends State<AppDrawer> {
                   ),
                 ),
                 DefaultTextStyle(
-                  style: TextStyle(
+                  style: const TextStyle(
                     fontSize: 12,
                     color: Colors.white54,
                   ),
@@ -112,13 +88,39 @@ class _AppDrawerState extends State<AppDrawer> {
                     margin: const EdgeInsets.symmetric(
                       vertical: 16.0,
                     ),
-                    child: Text('Terms of Service | Privacy Policy'),
+                    child: const Text('Terms of Service | Privacy Policy'),
                   ),
                 ),
               ],
             ),
           ),
         ),
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 0,
+          // title: const Text('Advanced Drawer Example'),
+          leading: IconButton(
+            onPressed: _handleMenuButtonPressed,
+            icon: ValueListenableBuilder<AdvancedDrawerValue>(
+              valueListenable: _advancedDrawerController,
+              builder: (_, value, __) {
+                return AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 250),
+                  child: Icon(
+                    value.visible
+                        ? Icons.clear
+                        : Icons.format_list_bulleted_sharp,
+                    key: ValueKey<bool>(value.visible),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        body: widget.childWidget,
       ),
     );
   }
@@ -134,14 +136,15 @@ class _AppDrawerState extends State<AppDrawer> {
 class DrawerList extends StatelessWidget {
   IconData icon;
   String text;
-  Function func;
+  VoidCallback func;
 
-  DrawerList(this.icon, this.text, this.func);
+  DrawerList(this.icon, this.text, this.func, {super.key});
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => func,
+      // onTap: () => func,
+      onTap: func,
       // leading: Icon(Icons.home),
       leading: Icon(
         icon,
@@ -149,7 +152,7 @@ class DrawerList extends StatelessWidget {
       ),
       title: Text(
         text,
-        style: TextStyle(
+        style: const TextStyle(
           fontSize: 20,
         ),
       ),

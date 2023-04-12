@@ -9,33 +9,34 @@ class FoodSearchBar extends StatelessWidget {
           child: TextField(
             decoration: InputDecoration(
               filled: true,
-              fillColor: Color.fromARGB(255, 251, 240, 228),
+              fillColor: const Color.fromARGB(255, 251, 240, 228),
               hintText: 'What do you want to order?',
-              hintStyle: TextStyle(color: Color.fromARGB(255, 215, 162, 93)),
+              hintStyle:
+                  const TextStyle(color: Color.fromARGB(255, 215, 162, 93)),
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20),
                 borderSide: BorderSide.none,
               ),
-              prefixIcon: Icon(
+              prefixIcon: const Icon(
                 Icons.search_rounded,
                 color: Color.fromARGB(255, 155, 93, 0),
               ),
             ),
           ),
         ),
-        SizedBox(
+        const SizedBox(
           width: 20,
         ),
         Container(
           decoration: BoxDecoration(
-            color: Color.fromARGB(255, 251, 240, 228),
+            color: const Color.fromARGB(255, 251, 240, 228),
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.circular(16),
           ),
           child: IconButton(
-            color: Color.fromARGB(255, 198, 123, 12),
+            color: const Color.fromARGB(255, 198, 123, 12),
             alignment: Alignment.center,
-            icon: Icon(
+            icon: const Icon(
               Icons.format_list_bulleted_sharp,
               size: 26,
             ),

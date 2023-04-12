@@ -4,6 +4,8 @@ import '../widgets/food_searchbar.dart';
 
 class HomeScreen extends StatelessWidget {
   static const routeName = 'home-screen';
+
+  const HomeScreen({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +20,7 @@ class HomeScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Padding(padding: EdgeInsets.all(15)),
-                Expanded(
+                const Expanded(
                   child: Text('Find Your Favourite Food',
                       style: TextStyle(
                         fontSize: 42,
@@ -27,13 +29,13 @@ class HomeScreen extends StatelessWidget {
                       textAlign: TextAlign.left),
                 ),
                 Card(
-                  margin: EdgeInsets.all(25),
+                  margin: const EdgeInsets.all(25),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: IconButton(
                       onPressed: () {},
-                      icon: Icon(
+                      icon: const Icon(
                         Icons.notifications_none,
                         color: Colors.orange,
                         size: 30,
@@ -42,17 +44,17 @@ class HomeScreen extends StatelessWidget {
               ],
             ),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: FoodSearchBar(),
             ),
             Container(
-              padding: EdgeInsets.all(16),
+              padding: const EdgeInsets.all(16),
               child: Column(
                 children: [
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
+                      const Text(
                         'Nearest Restaurant',
                         style: TextStyle(
                           fontWeight: FontWeight.bold,
@@ -61,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                       ),
                       TextButton(
                           onPressed: () {},
-                          child: Text(
+                          child: const Text(
                             'View More',
                             style: TextStyle(
                                 color: Colors.orange,
@@ -70,8 +72,8 @@ class HomeScreen extends StatelessWidget {
                           ))
                     ],
                   ),
-                  buildCard(),
-                  buildCard(),
+                  const buildCard(),
+                  const buildCard(),
                 ],
               ),
             ),
