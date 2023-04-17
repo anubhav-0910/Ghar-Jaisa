@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/build_Card.dart';
+import '../widgets/category_build_card.dart';
 import '../widgets/food_searchbar.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -45,7 +46,7 @@ class HomeScreen extends StatelessWidget {
             ),
             Container(
               padding: const EdgeInsets.all(16),
-              child: FoodSearchBar(),
+              child: const FoodSearchBar(),
             ),
             Container(
               padding: const EdgeInsets.all(16),
@@ -62,18 +63,33 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                          onPressed: () {},
-                          child: const Text(
-                            'View More',
-                            style: TextStyle(
-                                color: Colors.orange,
-                                fontWeight: FontWeight.w400,
-                                fontSize: 13),
-                          ))
+                        onPressed: () {},
+                        child: const Text(
+                          'View More',
+                          style: TextStyle(
+                              color: Colors.orange,
+                              fontWeight: FontWeight.w400,
+                              fontSize: 13),
+                        ),
+                      ),
                     ],
                   ),
                   const buildCard(),
                   const buildCard(),
+
+                  //Categories Of Food Items
+                  const SizedBox(
+                    width: double.infinity,
+                    child: Text(
+                      'Categories',
+                      textAlign: TextAlign.start,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                  ),
+                  const CategoryBuildCard(),
                 ],
               ),
             ),

@@ -29,6 +29,7 @@ class AuthService {
           password: password,
           address: '',
           user: '',
+          type: '',
           token: '');
 
       http.Response res = await http.post(Uri.parse('$uri/api/signup'),
@@ -39,8 +40,41 @@ class AuthService {
       httpErrorHandle(
           response: res,
           context: context,
-          onSuccess: () {
+          onSuccess: () async {
             showSnackBar(context, 'Account Created!');
+            //**********************************SIGN IN USER**************************88
+
+            try {
+              http.Response res = await http.post(Uri.parse('$uri/api/signin'),
+                  body: jsonEncode({'email': email, 'password': password}),
+                  headers: <String, String>{
+                    'Content-Type': 'application/json; chatset=UTF-8',
+                  });
+              httpErrorHandle(
+                  response: res,
+                  context: context,
+                  onSuccess: () async {
+                    //Getting instance
+                    SharedPreferences prefs =
+                        await SharedPreferences.getInstance();
+                    //Saving Data
+                    Provider.of<UserProvider>(context, listen: false)
+                        .setUser(res.body);
+                    //Setting auth token
+                    await prefs.setString(
+                        'x-auth-token', jsonDecode(res.body)['token']);
+                    //Navigating to the Home Screen
+                    Navigator.pushNamedAndRemoveUntil(
+                      context,
+                      HomeScreen.routeName,
+                      (route) => false,
+                    );
+                  });
+            } catch (e) {
+              showSnackBar(context, e.toString());
+            }
+
+            //**************************************************************** */
           });
     } catch (e) {
       showSnackBar(context, e.toString());

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import './food_detail_sheet.dart';
 
 class buildCard extends StatelessWidget {
   const buildCard({
@@ -23,9 +24,23 @@ class buildCard extends StatelessWidget {
             color: Colors.white,
             child: Column(
               children: [
-                Image.asset(
-                  'assets/images/malai_chaap.jpeg',
-                  fit: BoxFit.cover,
+                GestureDetector(
+                  child: Image.asset(
+                    'assets/images/malai_chaap.jpeg',
+                    fit: BoxFit.cover,
+                  ),
+                  onTap: () {
+                    showModalBottomSheet<void>(
+                        context: context,
+                        builder: (BuildContext context) {
+                          return FractionallySizedBox(
+                            heightFactor: 0.7,
+                            child: FoodDetailSheet(),
+                          );
+                        },
+                        elevation: 5,
+                        isScrollControlled: true);
+                  },
                 ),
                 const Padding(
                   padding: EdgeInsets.all(6.0),

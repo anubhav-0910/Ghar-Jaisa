@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 
-class FoodSearchBar extends StatelessWidget {
+import '../../search/screens/search_screen.dart';
+
+class FoodSearchBar extends StatefulWidget {
+  const FoodSearchBar({super.key});
+
+  @override
+  State<FoodSearchBar> createState() => _FoodSearchBarState();
+}
+
+class _FoodSearchBarState extends State<FoodSearchBar> {
+  void navigateToSearchScreen(String query) {
+    Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Row(
       children: [
         Expanded(
-          child: TextField(
+          child: TextFormField(
+            onFieldSubmitted: navigateToSearchScreen,
             decoration: InputDecoration(
               filled: true,
               fillColor: const Color.fromARGB(255, 251, 240, 228),

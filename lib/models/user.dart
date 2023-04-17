@@ -7,6 +7,7 @@ class User {
   final String password;
   final String address;
   final String user;
+  final String type;
   final String token;
   User({
     required this.id,
@@ -15,6 +16,8 @@ class User {
     required this.password,
     required this.address,
     required this.user,
+
+    required this.type,
     required this.token,
   });
 
@@ -26,6 +29,7 @@ class User {
       'password': password,
       'address': address,
       'user': user,
+      'type': type,
       'token': token,
     };
   }
@@ -38,6 +42,7 @@ class User {
       password: map['password'] ?? '',
       address: map['address'] ?? '',
       user: map['user'] ?? '',
+      type: map['type'] ?? '',
       token: map['token'] ?? '',
     );
   }
@@ -45,4 +50,26 @@ class User {
   String toJson() => json.encode(toMap());
 
   factory User.fromJson(String source) => User.fromMap(json.decode(source));
+
+  User copyWith({
+    String? id,
+    String? name,
+    String? email,
+    String? password,
+    String? address,
+    String? user,
+    String? type,
+    String? token,
+  }) {
+    return User(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      email: email ?? this.email,
+      password: password ?? this.password,
+      address: address ?? this.address,
+      user: user ?? this.user,
+      type: type ?? this.type,
+      token: token ?? this.token,
+    );
+  }
 }

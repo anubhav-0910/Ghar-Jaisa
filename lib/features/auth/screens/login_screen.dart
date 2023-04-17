@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_s4/features/auth/screens/signup_screen.dart';
 
 import '../services/auth_service.dart';
 
@@ -123,6 +124,20 @@ class _LoginScreenState extends State<LoginScreen> {
             const Text("Or",
                 style: TextStyle(fontSize: 20, color: Colors.black)),
             const SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacementNamed(context, SignUpScreen.routeName);
+              },
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.orange,
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 80, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+              child: const Text("SignUp", style: TextStyle(fontSize: 20)),
+            ),
             // SignInButton(
             //   Buttons.Google,
             //   onPressed: () {},

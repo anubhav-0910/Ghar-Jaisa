@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_s4/features/auth/screens/login_screen.dart';
 import 'package:project_s4/features/auth/services/auth_service.dart';
 
 class SignUpScreen extends StatefulWidget {
@@ -151,7 +152,29 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         borderRadius: BorderRadius.circular(10),
                       ),
                     ),
-                    child: const Text("Signup", style: TextStyle(fontSize: 20)),
+                    child: const Text(
+                      "Signup",
+                      style: TextStyle(fontSize: 20),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  const Text("Or",
+                      style: TextStyle(fontSize: 20, color: Colors.black)),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushReplacementNamed(
+                          context, LoginScreen.routeName);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.orange,
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 80, vertical: 12),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    child: const Text("LOGIN", style: TextStyle(fontSize: 20)),
                   ),
                 ],
               ),

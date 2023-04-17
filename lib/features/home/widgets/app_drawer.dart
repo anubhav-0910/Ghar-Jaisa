@@ -1,15 +1,44 @@
+// ignore_for_file: prefer_const_constructors, sort_child_properties_last, prefer_const_literals_to_create_immutables, use_build_context_synchronously
+
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_drawer/flutter_advanced_drawer.dart';
+import 'package:project_s4/features/auth/screens/login_screen.dart';
+import 'package:project_s4/features/home/screens/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../constants/utils.dart';
+import '../../user_profile/screens/user_profile_screen.dart';
 
 class AppDrawer extends StatefulWidget {
   final Widget? childWidget;
-  AppDrawer(this.childWidget);
+  const AppDrawer(this.childWidget);
+
   @override
   _AppDrawerState createState() => _AppDrawerState();
 }
 
 class _AppDrawerState extends State<AppDrawer> {
   final _advancedDrawerController = AdvancedDrawerController();
+
+  void _navigateToHome() {
+    _advancedDrawerController.hideDrawer();
+    Navigator.pushNamed(context, HomeScreen.routeName);
+  }
+
+  void logOut(BuildContext context) async {
+    try {
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
+      await sharedPreferences.setString('x-auth-token', '');
+      Navigator.pushNamedAndRemoveUntil(
+        context,
+        LoginScreen.routeName,
+        (route) => false,
+      );
+    } catch (e) {
+      showSnackBar(context, e.toString());
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +52,33 @@ class _AppDrawerState extends State<AppDrawer> {
       // openScale: 1.0,
       disabledGestures: false,
       childDecoration: const BoxDecoration(
-        borderRadius: const BorderRadius.all(Radius.circular(16)),
+        borderRadius: BorderRadius.all(Radius.circular(16)),
+      ),
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          foregroundColor: Colors.black,
+          elevation: 0,
+          // title: const Text('Advanced Drawer Example'),
+          leading: IconButton(
+            onPressed: _handleMenuButtonPressed,
+            icon: ValueListenableBuilder<AdvancedDrawerValue>(
+              valueListenable: _advancedDrawerController,
+              builder: (_, value, __) {
+                return AnimatedSwitcher(
+                  duration: Duration(milliseconds: 250),
+                  child: Icon(
+                    value.visible
+                        ? Icons.clear
+                        : Icons.format_list_bulleted_sharp,
+                    key: ValueKey<bool>(value.visible),
+                  ),
+                );
+              },
+            ),
+          ),
+        ),
+        body: widget.childWidget,
       ),
       drawer: SafeArea(
         child: Container(
@@ -33,9 +88,19 @@ class _AppDrawerState extends State<AppDrawer> {
             child: Column(
               mainAxisSize: MainAxisSize.max,
               children: [
-                const SizedBox(height: 80),
+                SizedBox(height: 80),
+                DrawerList(
+                  Icons.home,
+                  'Home',
+                  _navigateToHome,
+                ),
+                const Divider(
+                  color: Colors.white,
+                  indent: 75,
+                  endIndent: 30,
+                ),
                 DrawerList(Icons.account_circle_rounded, 'Profile', () {
-                  print('object');
+                  Navigator.of(context).pushNamed(UserProfileScreen.routeName);
                 }),
                 const Divider(
                   color: Colors.white,
@@ -61,26 +126,35 @@ class _AppDrawerState extends State<AppDrawer> {
                   indent: 75,
                   endIndent: 30,
                 ),
-                DrawerList(Icons.security_sharp, 'Security', () {}),
-                const Spacer(),
+                DrawerList(
+                    Icons.pending_actions_outlined, 'Send Feedback', () {}),
+                const Divider(
+                  color: Colors.white,
+                  indent: 75,
+                  endIndent: 30,
+                ),
+                Spacer(),
                 TextButton(
                   onPressed: () {},
                   style: TextButton.styleFrom(foregroundColor: Colors.white),
-                  child: Row(
-                    children: const [
-                      SizedBox(
-                        width: 30,
-                      ),
-                      Text(
-                        'Sign-Out  ',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      Icon(Icons.arrow_forward),
-                    ],
+                  child: InkWell(
+                    onTap: () => logOut(context),
+                    child: Row(
+                      children: [
+                        const SizedBox(
+                          width: 30,
+                        ),
+                        Text(
+                          'Sign-Out  ',
+                          style: TextStyle(fontSize: 18),
+                        ),
+                        Icon(Icons.arrow_forward),
+                      ],
+                    ),
                   ),
                 ),
                 DefaultTextStyle(
-                  style: const TextStyle(
+                  style: TextStyle(
                     fontSize: 12,
                     color: Colors.white54,
                   ),
@@ -88,39 +162,13 @@ class _AppDrawerState extends State<AppDrawer> {
                     margin: const EdgeInsets.symmetric(
                       vertical: 16.0,
                     ),
-                    child: const Text('Terms of Service | Privacy Policy'),
+                    child: Text('Terms of Service | Privacy Policy'),
                   ),
                 ),
               ],
             ),
           ),
         ),
-      ),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          foregroundColor: Colors.black,
-          elevation: 0,
-          // title: const Text('Advanced Drawer Example'),
-          leading: IconButton(
-            onPressed: _handleMenuButtonPressed,
-            icon: ValueListenableBuilder<AdvancedDrawerValue>(
-              valueListenable: _advancedDrawerController,
-              builder: (_, value, __) {
-                return AnimatedSwitcher(
-                  duration: const Duration(milliseconds: 250),
-                  child: Icon(
-                    value.visible
-                        ? Icons.clear
-                        : Icons.format_list_bulleted_sharp,
-                    key: ValueKey<bool>(value.visible),
-                  ),
-                );
-              },
-            ),
-          ),
-        ),
-        body: widget.childWidget,
       ),
     );
   }
@@ -138,12 +186,11 @@ class DrawerList extends StatelessWidget {
   String text;
   VoidCallback func;
 
-  DrawerList(this.icon, this.text, this.func, {super.key});
+  DrawerList(this.icon, this.text, this.func);
 
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      // onTap: () => func,
       onTap: func,
       // leading: Icon(Icons.home),
       leading: Icon(
@@ -152,7 +199,7 @@ class DrawerList extends StatelessWidget {
       ),
       title: Text(
         text,
-        style: const TextStyle(
+        style: TextStyle(
           fontSize: 20,
         ),
       ),
