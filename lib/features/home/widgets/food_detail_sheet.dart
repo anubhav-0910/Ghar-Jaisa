@@ -36,11 +36,11 @@ class _FoodDetailSheetState extends State<FoodDetailSheet> {
             child: Image.asset(
               'assets/images/malai_chaap.jpeg',
               fit: BoxFit.cover,
-              height: 240,
+              height: 260,
             ),
           ),
           Padding(
-            padding: const EdgeInsets.only(left: 20),
+            padding: const EdgeInsets.only(left: 20, top: 10),
             child: Align(
               heightFactor: 0,
               alignment: Alignment.bottomLeft,

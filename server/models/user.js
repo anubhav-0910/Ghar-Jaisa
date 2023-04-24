@@ -1,5 +1,7 @@
 //Package Imports
 const mongoose = require("mongoose");
+const { productSchema } = require("./product");
+
 
 //User model Schema
 const userSchema = mongoose.Schema({
@@ -42,7 +44,25 @@ const userSchema = mongoose.Schema({
         type:String,
         default:'user',
     },
+    verified:{
+        type: Number,
+        default: 0,
+        
+    },
+    phone:{
+        type:Number,
+        default: 0,
+    },
     //cart
+    cart: [
+        {
+          product: productSchema,
+          quantity: {
+            type: Number,
+            required: true,
+          },
+        },
+      ],
 });
 
 

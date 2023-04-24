@@ -94,7 +94,7 @@ class SearchedProduct extends StatelessWidget {
             alignment: Alignment.centerLeft,
             height: 50,
             width: 130,
-            child: AddToCartMenu())
+            child: AddToCartMenu(product, context))
       ],
     );
   }

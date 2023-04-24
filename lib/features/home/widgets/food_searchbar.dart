@@ -41,22 +41,22 @@ class _FoodSearchBarState extends State<FoodSearchBar> {
         const SizedBox(
           width: 20,
         ),
-        Container(
-          decoration: BoxDecoration(
-            color: const Color.fromARGB(255, 251, 240, 228),
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: IconButton(
-            color: const Color.fromARGB(255, 198, 123, 12),
-            alignment: Alignment.center,
-            icon: const Icon(
-              Icons.format_list_bulleted_sharp,
-              size: 26,
-            ),
-            onPressed: () {},
-          ),
-        ),
+        // Container(
+        //   decoration: BoxDecoration(
+        //     color: const Color.fromARGB(255, 251, 240, 228),
+        //     shape: BoxShape.rectangle,
+        //     borderRadius: BorderRadius.circular(16),
+        //   ),
+        //   child: IconButton(
+        //     color: const Color.fromARGB(255, 198, 123, 12),
+        //     alignment: Alignment.center,
+        //     icon: const Icon(
+        //       Icons.format_list_bulleted_sharp,
+        //       size: 26,
+        //     ),
+        //     onPressed: () {},
+        //   ),
+        // ),
       ],
     );
   }

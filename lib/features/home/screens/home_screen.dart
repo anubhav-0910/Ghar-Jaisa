@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_s4/features/home/screens/notifications.dart';
+import 'package:project_s4/features/home/screens/view_all.dart';
 import '../widgets/build_Card.dart';
 import '../widgets/category_build_card.dart';
 import '../widgets/food_searchbar.dart';
@@ -35,7 +37,10 @@ class HomeScreen extends StatelessWidget {
                     borderRadius: BorderRadius.circular(20),
                   ),
                   child: IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.pushNamed(
+                            context, NotificationPage.routeName);
+                      },
                       icon: const Icon(
                         Icons.notifications_none,
                         color: Colors.orange,
@@ -63,7 +68,9 @@ class HomeScreen extends StatelessWidget {
                         ),
                       ),
                       TextButton(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.pushNamed(context, ViewAllScreen.routeName);
+                        },
                         child: const Text(
                           'View More',
                           style: TextStyle(

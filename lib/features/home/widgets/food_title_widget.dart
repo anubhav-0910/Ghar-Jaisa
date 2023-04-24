@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'add_to_cart_button.dart';
 
+// ignore: must_be_immutable
 class FoodTitleWidget extends StatelessWidget {
   String productName;
   String productDescription;
@@ -34,7 +35,7 @@ class FoodTitleWidget extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.only(right: 25),
-              child: AddToCartMenu(),
+              // child: AddToCartMenu(product, context),
             ),
           ],
         ),

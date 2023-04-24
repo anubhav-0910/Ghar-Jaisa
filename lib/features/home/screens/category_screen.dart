@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-import '../../home/widgets/food_searchbar.dart';
 import '../../../models/product.dart';
 import '../services/home_services.dart';
 import '../../home/widgets/add_to_cart_button.dart';
@@ -166,12 +165,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                         ],
                                       ),
                                       Container(
-                                          padding:
-                                              const EdgeInsets.only(left: 60),
-                                          alignment: Alignment.centerLeft,
-                                          height: 50,
-                                          width: 130,
-                                          child: AddToCartMenu())
+                                        padding:
+                                            const EdgeInsets.only(left: 60),
+                                        alignment: Alignment.centerLeft,
+                                        height: 50,
+                                        width: 130,
+                                        child: AddToCartMenu(
+                                          product,
+                                          context,
+                                        ),
+                                      )
                                     ],
                                   )),
                             ),

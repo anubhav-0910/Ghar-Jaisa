@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:badges/badges.dart' as badges;
+
 import 'package:project_s4/constants/global_variables.dart';
+import 'package:project_s4/features/orders/screens/orders_history_screen.dart';
 
 import '../../features/home/screens/home_screen.dart';
 
@@ -20,10 +21,8 @@ class _BottomBarState extends State<BottomBar> {
 
   //Screens
   List<Widget> pages = [
-    (HomeScreen()),
-    const Center(
-      child: Text("Orders"),
-    ),
+    (const HomeScreen()),
+    OrdersHistoryScreen(),
   ];
 
   void updatePage(int page) {
@@ -62,28 +61,7 @@ class _BottomBarState extends State<BottomBar> {
             label: '',
           ),
 
-          //2 FAVOURITES
-          // BottomNavigationBarItem(
-          //   icon: Container(
-          //     width: bottomBarWidth,
-          //     decoration: BoxDecoration(
-          //       border: Border(
-          //         top: BorderSide(
-          //           color: _page == 1
-          //               ? GlobalVariables.selectedNavBarColor
-          //               : GlobalVariables.backgroundColor,
-          //           width: bottomBarBorderWidth,
-          //         ),
-          //       ),
-          //     ),
-          //     child: const Icon(
-          //       Icons.favorite_outline_outlined,
-          //     ),
-          //   ),
-          //   label: '',
-          // ),
-
-          //3 CART
+          //2 CART
           BottomNavigationBarItem(
             icon: Container(
               width: bottomBarWidth,
@@ -97,23 +75,12 @@ class _BottomBarState extends State<BottomBar> {
                   ),
                 ),
               ),
-              child: const badges.Badge(
-                badgeContent: Text("2"),
-                badgeStyle: badges.BadgeStyle(
-                  elevation: 0,
-                  badgeColor: Colors.white,
-                ),
-                child: Icon(
-                  Icons.shopping_cart_outlined,
-                ),
+              child: const Icon(
+                Icons.shopping_cart_checkout_sharp,
               ),
             ),
             label: '',
           ),
-
-          ///4 MESSAGE
-
-          ///
         ],
       ),
     );

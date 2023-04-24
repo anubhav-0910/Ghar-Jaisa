@@ -7,6 +7,8 @@ import 'package:project_s4/features/home/screens/home_screen.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../constants/utils.dart';
+import '../../cart/screen/carts_screen.dart';
+import '../../feedback/screens/feedback_screen.dart';
 import '../../user_profile/screens/user_profile_screen.dart';
 
 class AppDrawer extends StatefulWidget {
@@ -23,6 +25,16 @@ class _AppDrawerState extends State<AppDrawer> {
   void _navigateToHome() {
     _advancedDrawerController.hideDrawer();
     Navigator.pushNamed(context, HomeScreen.routeName);
+  }
+
+  void _navigateToFeedback() {
+    _advancedDrawerController.hideDrawer();
+    Navigator.pushNamed(context, FeedBackScreen.routeName);
+  }
+
+  void _navigateToOrders() {
+    _advancedDrawerController.hideDrawer();
+    Navigator.pushNamed(context, CartsScreen.routeName);
   }
 
   void logOut(BuildContext context) async {
@@ -107,7 +119,8 @@ class _AppDrawerState extends State<AppDrawer> {
                   indent: 75,
                   endIndent: 30,
                 ),
-                DrawerList(Icons.shopping_cart_checkout_sharp, 'Orders', () {}),
+                DrawerList(Icons.shopping_cart_checkout_sharp, 'Orders',
+                    _navigateToOrders),
                 const Divider(
                   color: Colors.white,
                   indent: 75,
@@ -126,8 +139,8 @@ class _AppDrawerState extends State<AppDrawer> {
                   indent: 75,
                   endIndent: 30,
                 ),
-                DrawerList(
-                    Icons.pending_actions_outlined, 'Send Feedback', () {}),
+                DrawerList(Icons.pending_actions_outlined, 'Send Feedback',
+                    _navigateToFeedback),
                 const Divider(
                   color: Colors.white,
                   indent: 75,

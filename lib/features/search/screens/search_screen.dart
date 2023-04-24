@@ -70,7 +70,7 @@ class _SearchScreenState extends State<SearchScreen> {
                     child: Column(
                       children: const [
                         SizedBox(
-                          height: 300,
+                          height: 200,
                         ),
                         Icon(
                           Icons.search,

@@ -1,20 +1,54 @@
 //Package Imports
+const client = require('twilio')('ACc08307b2eb2faca5f785db61e6c154be', '4dbd3574b5ecbfdcb4563aaad32427b1');
 const express = require("express");
 const bcryptjs = require("bcryptjs");
 const mongoose = require("mongoose");
 const jwt = require("jsonwebtoken");
+const otpGenerator = require("otp-generator");
+const crypto = require("crypto");
+const key = "otp-secret-key";
+
 
 //Other Files Imports
 const User = require("../models/user");
 const auth = require("../middlewares/auth");
-
+const { error } = require('console');
 
 
 //initializing and adding router functionality
 const authRouter = express.Router();
 
+//__________________________________FINDING USER_________________________________
 
-//__________________________________SIGNUP USER_________________________________
+authRouter.get("/api/findUser/:email",  async (req, res) => {
+    const emails=req.params.email;
+    console.log(`${emails}`);
+    const existingUser = await User.find({
+        email:{$regex: req.params.email}
+    });
+    //console.log(existingUser.email);
+    try{
+        if(existingUser[0] != null)
+        {
+        if(existingUser[0].email == null || existingUser[0].email == undefined){
+            res.send(201, {"result": false});
+        }
+         else
+        {
+            res.send(200, {"result": true});
+
+    }
+    } else{
+            res.send(201, {"result": false});
+    }
+    } catch (e) {
+        console.log(e);
+        res.status(500).json({error:e.message});
+    }
+  });
+
+
+//__________________________________SIGN-UP USER_________________________________
 authRouter.post('/api/signup', async (req, res)=>{
     try {
 
@@ -115,6 +149,102 @@ authRouter.get("/", auth, async (req, res) => {
     const user = await User.findById(req.user);
     res.json({ ...user._doc, token: req.token });
   });
+
+
+  //__________________________________OTP VERIFICATION_________________________________  
+
+  //OTP GENERATION
+  authRouter.post("/api/otpLogin", async (req, res)=>{
+    try {
+        const {phone}=req.body;
+
+        const otp = await otpGenerator.generate(4, {
+            lowerCaseAlphabets: false,
+            specialChars: false,
+            upperCaseAlphabets: false,
+            
+        });
+        const ttl = 5*60*1000;
+        const expires = Date.now()+ttl;
+        const data = `${phone}.${otp}.${expires}`;
+        const hash= crypto.createHmac("sha256", key).update(data).digest("hex");
+        const fullHash = `${hash}.${expires}`;
+
+        
+        //****************SEND MSG TO USER****************************
+
+
+        client.messages
+  .create({
+    body: `Your otp is ${otp} for the FOOD DeliVery`,
+    // to: `+918528469069`,
+    to: `+919408698359`,
+    from: `+447883305299`,
+  })
+  .then((message) => console.log(message))
+  .catch((error) => {
+    // You can implement your fallback code here
+    console.log(error);
+  });
+        
+
+
+        //***************************************************** */
+        res.json(fullHash);
+        
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+  });
+
+  //OTP AUTHENTICATION
+  authRouter.post("/api/otpVerify", async (req, res)=>{
+    try {
+        //variables
+        const token = req.header("x-auth-token");
+        const verified = jwt.verify(token, "passwordKey");
+        const user = await User.findById(verified.id);
+        //otp
+        const {phone,otp, hash}=req.body;
+        [hashValue, expire]= hash.split( '.');
+        let now = Date.now();
+        if(now > parseInt(expire)) {
+            return res.status(400).json({msg: "OTP EXPIRED"});
+        }
+        let data = `${phone}.${otp}.${expire}`;
+
+       let newCalculateHash = crypto
+    .createHmac("sha256", key)
+    .update(data)
+    .digest("hex");
+
+    if(newCalculateHash === hashValue){
+        //update user verification status
+        user.verified = 1;
+        user.phone = phone;
+
+        await user.save();
+        res.json("OTP VERIFIED");
+    } else {
+        return res.status(400).json({msg:"INVALID OTP"});
+    }
+        
+    } catch (e) {
+        res.status(500).json({ error: e.message });
+    }
+  });
+  
+
+//__________________________________CHANGE USER PASSWORD_________________________________
+//*****to do*****/
+authRouter.post("/update-password" ,async(req, res) => {
+    try {
+        const {id, password, newPassword}=req.body;
+        
+    } catch (e) {
+        res.status(500).json({error: e.message});
+    }
+});
 
 
 //export the authRouter functionality

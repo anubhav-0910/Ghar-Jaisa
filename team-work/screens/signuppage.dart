@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:flutter_signin_button/flutter_signin_button.dart';
 
 class signupPage extends StatelessWidget {
   static const routeName = 'ResetPassword';
@@ -7,8 +7,8 @@ class signupPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        decoration: const BoxDecoration(
+        padding: EdgeInsets.symmetric(horizontal: 20),
+        decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/food_background.jpg"),
             fit: BoxFit.cover,
@@ -17,52 +17,52 @@ class signupPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
+            Text(
               "Signup to your account",
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 40),
+            SizedBox(height: 40),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.7),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextFormField(
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Username ",
                   icon: Icon(Icons.email, color: Colors.orange),
                   border: InputBorder.none,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.7),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextFormField(
                 keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Email ",
                   icon: Icon(Icons.email, color: Colors.orange),
                   border: InputBorder.none,
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               decoration: BoxDecoration(
                 color: Colors.white.withOpacity(0.7),
                 borderRadius: BorderRadius.circular(10),
               ),
               child: TextFormField(
                 obscureText: true,
-                decoration: const InputDecoration(
+                decoration: InputDecoration(
                   hintText: "Password",
                   icon: Icon(Icons.lock, color: Colors.orange),
                   //suffixIcon: Icon(Icons.visibility, color: Colors.orange),
@@ -70,14 +70,13 @@ class signupPage extends StatelessWidget {
                 ),
               ),
             ),
-            const SizedBox(height: 20),
+            SizedBox(height: 20),
             ElevatedButton(
               onPressed: () {},
-              child: const Text("Signup", style: TextStyle(fontSize: 20)),
+              child: Text("Signup", style: TextStyle(fontSize: 20)),
               style: ElevatedButton.styleFrom(
                 primary: Colors.orange,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 80, vertical: 12),
+                padding: EdgeInsets.symmetric(horizontal: 80, vertical: 12),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(10),
                 ),

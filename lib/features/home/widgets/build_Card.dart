@@ -31,6 +31,12 @@ class buildCard extends StatelessWidget {
                   ),
                   onTap: () {
                     showModalBottomSheet<void>(
+                        shape: const RoundedRectangleBorder(
+                          borderRadius: BorderRadius.vertical(
+                            top: Radius.circular(25),
+                          ),
+                        ),
+                        clipBehavior: Clip.antiAliasWithSaveLayer,
                         context: context,
                         builder: (BuildContext context) {
                           return FractionallySizedBox(
