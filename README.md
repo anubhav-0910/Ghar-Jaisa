@@ -1,4 +1,4 @@
-# project_s4
+# GHAR JAISA
 
-Semester 4 Project on Food Delivery Application Using Flutter and dart.
+Project for a restaurant Food Delivery Application Using Flutter and dart.
 
