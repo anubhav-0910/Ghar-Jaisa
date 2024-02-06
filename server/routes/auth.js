@@ -179,7 +179,7 @@ authRouter.get("/", auth, async (req, res) => {
     body: `Your otp is ${otp} for the FOOD DeliVery`,
     // to: `+918528469069`,
     to: `+919408698359`,
-    from: `+447883305299`,
+    from: `+16592993902`,
   })
   .then((message) => console.log(message))
   .catch((error) => {
