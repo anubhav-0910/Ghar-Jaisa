@@ -4,6 +4,10 @@
 
 GharJaisa is a convenient food delivery application designed to bring the deliciousness of your favorite fast food chain straight to your doorstep. With a user-friendly interface and seamless ordering process, GharJaisa lets you indulge in your cravings effortlessly.
 
+## **Click the image below to watch a preview of GharJaisa in action!**
+
+[![Video Preview Link](https://i.ytimg.com/vi/pzuaSWI-1zs/hqdefault.jpg)](https://youtu.be/pzuaSWI-1zs)
+
 ## Features
 
 * **Browse Menus:** Explore our mouthwatering selection of dishes, categorized for easy navigation. Filter by category, dietary restrictions, or promotions to find what you're looking for.
